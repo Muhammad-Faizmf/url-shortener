@@ -36,4 +36,21 @@ async function handleGetShortURL(req, res) {
   return res.redirect(entry.redirectURL);
 }
 
-module.exports = { handleGenerateNewURL, handleGetShortURL };
+async function handleAnalytics(req, res) {
+  const shortId = req.params.shortId;
+  if (!shortId) {
+    return res.status(400).json({ error: "Id is not provided" });
+  }
+  const result = await URL.findOne({ shortId });
+
+  return res.status(200).json({
+    totalClicks: result.visitHistory.length,
+    visitHistory: result.visitHistory,
+  });
+}
+
+module.exports = {
+  handleGenerateNewURL,
+  handleGetShortURL,
+  handleAnalytics,
+};

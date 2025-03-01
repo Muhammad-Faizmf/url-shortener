@@ -9,7 +9,8 @@ const router = require("./routes/url");
 const PORT = 8001;
 
 // Mongoogse connnection
-connectMongoDB() // add parameter here your mongodb url with database
+// add parameter here your mongodb url with database
+connectMongoDB("")
   .then(() => console.log("Mongoose connected"))
   .catch((e) => console.log(e));
 
